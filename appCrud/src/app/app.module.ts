@@ -18,15 +18,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-
-
-
+import { CategoriasComponent } from './views/categorias/categorias.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
-    AboutComponent
+    AboutComponent,
+    CategoriasComponent
   ],
   imports: [
     BrowserModule,

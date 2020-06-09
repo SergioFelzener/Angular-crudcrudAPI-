@@ -2,12 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { Game } from 'src/app/model/game';
 import { GameService } from 'src/app/services/game.service';
-
-
-interface Categoria {
-  name: string;
-}
-
+import Categoria from 'src/app/model/Categoria'
 
 @Component({
   selector: 'app-game',
@@ -21,18 +16,8 @@ export class GameComponent implements OnInit {
 
   categoriaControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
-  categorias: Categoria[] = [
-    {name: 'Ação'},
-    {name: 'Estratégia'},
-    {name: 'Esportes'},
-    {name: 'RPG'},
-    {name: 'Puzzle'},
-    {name: 'Simulador'},
-  ];
 
-
-
-
+  categorias: Array<Categoria> = []
 
   constructor(private gameService: GameService) { }
 
@@ -54,6 +39,9 @@ export class GameComponent implements OnInit {
 
   }
 
+  getCategorias(): void {
+    // Buscar as categorias no LocalStorage
+  }
 
 
 }

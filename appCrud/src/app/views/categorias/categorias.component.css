@@ -1,0 +1,22 @@
+table {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.container{
+  margin: 0 auto;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+}
+
+.buttons{
+  display: flex;
+  align-items: center;
+}
+
+button {
+  margin: 5px;
+}
