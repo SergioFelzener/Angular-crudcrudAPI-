@@ -20,13 +20,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { CategoriasComponent } from './views/categorias/categorias.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './views/dialog/dialog.component';
+import { DialogUpdateComponent } from './views/dialog-update/dialog-update.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     GameComponent,
     AboutComponent,
-    CategoriasComponent
+    CategoriasComponent,
+    DialogComponent,
+    DialogUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,7 @@ import { CategoriasComponent } from './views/categorias/categorias.component';
     HttpClientModule,
     MatTableModule,
     FormsModule,
+    MatDialogModule,
 
   ],
   providers: [],

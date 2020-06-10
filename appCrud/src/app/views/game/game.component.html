@@ -111,7 +111,7 @@
       <mat-label>Categoria</mat-label>
       <mat-select required [(ngModel)]="gameSelecionado.categoria">
         <mat-option>--</mat-option>
-        <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria.name">
           {{ categoria.name }}
         </mat-option>
       </mat-select>
@@ -138,6 +138,7 @@
     </table>
     
     <button (click)="salvar()" class="btnAcao" mat-raised-button color="accent">Salvar</button>
+    <button (click)="cancelar()" class="btnAcao" mat-raised-button color="accent">Cancelar</button>
   </div>
 
 </mat-card>

@@ -4,6 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Game } from 'src/app/model/game';
 import { GameService } from 'src/app/services/game.service';
 import Categoria from 'src/app/model/Categoria'
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
   selector: 'app-game',
@@ -22,10 +23,14 @@ export class GameComponent implements OnInit {
   gameForm = new FormControl('', Validators.required);
   categorias: Array<Categoria> = []
 
-  constructor(private gameService: GameService) { }
+  constructor(
+    private gameService: GameService,
+    private categoriaService: CategoriaService
+    ) { }
 
   ngOnInit(): void {
     this.list();
+    this.getCategorias()
   }
 
   list() {
@@ -41,6 +46,9 @@ export class GameComponent implements OnInit {
     });
 
   }
+  cancelar() {
+    this.gameSelecionado = null;
+  }
 
   selecionar(game: Game) {
     this.inserindo = false;
@@ -51,12 +59,13 @@ export class GameComponent implements OnInit {
       this.gameService.insertGame(this.gameSelecionado).subscribe(() => {
         alert('Game inserido');
         this.list();
-
+        this.cancelar();
       });
     } else {
       this.gameService.updateGame(this.gameSelecionado).subscribe(() => {
         alert('Game atualizado');
         this.list();
+        this.cancelar();
       });
 
     }
@@ -67,7 +76,9 @@ export class GameComponent implements OnInit {
   }
 
   getCategorias(): void {
-    // Buscar as categorias no LocalStorage
+    this.categoriaService.read().forEach(categoria => {
+      this.categorias.push(categoria)
+    })
   }
 
 
