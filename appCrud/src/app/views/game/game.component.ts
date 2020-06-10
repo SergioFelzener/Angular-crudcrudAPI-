@@ -67,7 +67,7 @@ export class GameComponent implements OnInit {
         this.list();
         this.cancelar();
       });
-
+      
     }
   }
   novoGame() {
