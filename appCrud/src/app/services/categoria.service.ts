@@ -19,7 +19,8 @@ export class CategoriaService {
   read(): Array<Categoria> {
     this.categorias = JSON.parse(localStorage.getItem('categorias'))
 
-    if(this.categorias == null) this.categorias = []
+    if(this.categorias == null) 
+      this.categorias = []
 
     return this.categorias
   }
