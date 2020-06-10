@@ -11,19 +11,19 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   listGames(): Observable<Game[]> {
-    return this.http.get<Game[]>('https://crudcrud.com/api/b4ef9c814a2a451b84058e4a7b2135e1/game');
+    return this.http.get<Game[]>('https://crudcrud.com/api/73324a9ab327483ca5e2cd1044ae8026/game');
   }
 
   insertGame(game: Game): Observable<Game> {
-    return this.http.post<Game>('https://crudcrud.com/api/b4ef9c814a2a451b84058e4a7b2135e1/game', game);
+    return this.http.post<Game>('https://crudcrud.com/api/73324a9ab327483ca5e2cd1044ae8026/game', game);
   }
 
   updateGame(game: Game): Observable<any> {
-    return this.http.put('https://crudcrud.com/api/b4ef9c814a2a451b84058e4a7b2135e1/game/' + game._id, game);
+    return this.http.put('https://crudcrud.com/api/73324a9ab327483ca5e2cd1044ae8026/game/' + game._id, game);
   }
 
   deleteGame(id: string): Observable<any> {
-    return this.http.delete('https://crudcrud.com/api/b4ef9c814a2a451b84058e4a7b2135e1/game/' + id);
+    return this.http.delete('https://crudcrud.com/api/73324a9ab327483ca5e2cd1044ae8026/game/' + id);
   }
 
 

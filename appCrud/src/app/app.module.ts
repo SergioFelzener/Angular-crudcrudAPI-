@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FormsModule } from '@angular/forms';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,7 +22,6 @@ import { MatTableModule } from '@angular/material/table';
 import { CategoriasComponent } from './views/categorias/categorias.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './views/dialog/dialog.component';
-import { FormsModule } from '@angular/forms';
 import { DialogUpdateComponent } from './views/dialog-update/dialog-update.component'
 
 @NgModule({
@@ -48,8 +48,8 @@ import { DialogUpdateComponent } from './views/dialog-update/dialog-update.compo
     MatSelectModule,
     HttpClientModule,
     MatTableModule,
+    FormsModule,
     MatDialogModule,
-    FormsModule
 
   ],
   providers: [],
