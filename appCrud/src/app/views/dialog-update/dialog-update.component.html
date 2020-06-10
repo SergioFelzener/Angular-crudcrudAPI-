@@ -1,11 +1,11 @@
 <h1 mat-dialog-title>Editar categoria</h1>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Nome da categoria</mat-label>
-    <input matInput [(ngModel)]="name">
-  </mat-form-field>
+    <mat-form-field>
+        <mat-label>Nome da categoria</mat-label>
+        <input matInput [(ngModel)]="name">
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button (click)="onNoClick()" mat-button>Cancelar</button>
-  <button (click)="updateCategoria()" mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Editar</button>
+    <button (click)="onNoClick()" mat-button>Cancelar</button>
+    <button (click)="updateCategoria()" mat-button [mat-dialog-close]="data.name" color="primary" cdkFocusInitial>Editar</button>
 </div>

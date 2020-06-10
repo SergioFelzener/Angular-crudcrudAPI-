@@ -4,7 +4,7 @@
     width: 100%;
 }
 
-.example-full-width {
+.formApp {
     width: 100%;
 }
 
@@ -30,4 +30,9 @@ td {
 
 .mat-icon-refresh {
     font-size: 40px;
+}
+
+.btnAcao {
+    margin-left: 20px;
+    text-align: right;
 }
