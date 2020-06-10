@@ -15,7 +15,6 @@ export class CategoriasComponent implements OnInit {
   categorias: Array<Categoria> = []
   displayedColumns: string[] = ['id', 'name', 'editar', 'deletar'];
   dataSource = this.categorias
-
   name: string;
 
   constructor(
@@ -30,6 +29,7 @@ export class CategoriasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.read()
     });
   }
 
@@ -41,6 +41,7 @@ export class CategoriasComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.read()
     });
   } 
 
@@ -48,10 +49,15 @@ export class CategoriasComponent implements OnInit {
     this.read()
   }
 
+
   read() : void {
+    this.categorias = []
+    
     this.categoriaService.read().forEach(categoria => {
       this.categorias.push(categoria)
     })
+
+    this.dataSource = this.categorias
   }
 
   update(id: string) : void {
@@ -61,6 +67,7 @@ export class CategoriasComponent implements OnInit {
 
   delete(id: string) : void {
     this.categoriaService.delete(id)
+    this.read()
   }
 
 }
