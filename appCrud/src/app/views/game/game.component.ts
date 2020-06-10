@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+
 import { Game } from 'src/app/model/game';
 import { GameService } from 'src/app/services/game.service';
 import Categoria from 'src/app/model/Categoria'
@@ -12,11 +13,13 @@ import Categoria from 'src/app/model/Categoria'
 export class GameComponent implements OnInit {
 
   games: Game[];
-  colunas = ['titulo', 'plataforma', 'fabricante', 'categoria', 'status','fabricacao', 'acao'];
+  colunas = ['titulo', 'plataforma', 'fabricante', 'categoria', 'status', 'fabricacao', 'acao'];
+  gameSelecionado: Game;
+  inserindo = false;
 
   categoriaControl = new FormControl('', Validators.required);
   selectFormControl = new FormControl('', Validators.required);
-
+  gameForm = new FormControl('', Validators.required);
   categorias: Array<Categoria> = []
 
   constructor(private gameService: GameService) { }
@@ -25,7 +28,7 @@ export class GameComponent implements OnInit {
     this.list();
   }
 
-  list(){
+  list() {
     this.gameService.listGames().subscribe(games => {
       this.games = games;
     });
@@ -37,6 +40,30 @@ export class GameComponent implements OnInit {
       this.list();
     });
 
+  }
+
+  selecionar(game: Game) {
+    this.inserindo = false;
+    this.gameSelecionado = game;
+  }
+  salvar() {
+    if (this.inserindo) {
+      this.gameService.insertGame(this.gameSelecionado).subscribe(() => {
+        alert('Game inserido');
+        this.list();
+
+      });
+    } else {
+      this.gameService.updateGame(this.gameSelecionado).subscribe(() => {
+        alert('Game atualizado');
+        this.list();
+      });
+
+    }
+  }
+  novoGame() {
+    this.inserindo = true;
+    this.gameSelecionado = new Game();
   }
 
   getCategorias(): void {

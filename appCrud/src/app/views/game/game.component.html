@@ -1,142 +1,143 @@
 <mat-card class="page-card">
-    <h2>Gerenciador de Jogos</h2>
+  <h2>Gerenciador de Jogos</h2>
+  <button class="formButtonAdd" (click)="novoGame()" mat-fab color="primary">
+    <mat-icon>fiber_new</mat-icon>
+  </button>
 
-    <button class="formButtonAdd" mat-fab color="primary">
-      <mat-icon>fiber_new</mat-icon>
-    </button>
-    <button class="refreshButton" mat-button color="primary" (click)="list()">
-       <mat-icon class="mat-icon-refresh">refresh</mat-icon>
-    </button>
+  <button class="refreshButton" mat-button color="primary" (click)="list()">
+    <mat-icon class="mat-icon-refresh">refresh</mat-icon>
+  </button>
 
-    <div>
-        <mat-table [dataSource]="games">
-            <ng-container matColumnDef="titulo">
-                <mat-header-cell *matHeaderCellDef>
-                    Título
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.titulo}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="plataforma">
-                <mat-header-cell *matHeaderCellDef>
-                    Plataforma
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.plataforma}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="fabricante">
-                <mat-header-cell *matHeaderCellDef>
-                    Fabricante
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.fabricante}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="categoria">
-                <mat-header-cell *matHeaderCellDef>
-                    Categoria
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.categoria}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="status">
-                <mat-header-cell *matHeaderCellDef>
-                    Status
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.status}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="fabricacao">
-                <mat-header-cell *matHeaderCellDef>
-                    Fabricação
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    {{game.fabricacao}}
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="acao">
-                <mat-header-cell *matHeaderCellDef>
-                    Ações
-                </mat-header-cell>
-                <mat-cell *matCellDef="let game">
-                    <button (click)="delete(game._id);" mat-button color="primary">
-                      <mat-icon>delete</mat-icon>
-                    </button>
-                    <button style="float: left;" mat-button color="primary">
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
+  <div>
+    <mat-table [dataSource]="games">
+      <ng-container matColumnDef="titulo">
+        <mat-header-cell *matHeaderCellDef>
+          Título
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.titulo }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="plataforma">
+        <mat-header-cell *matHeaderCellDef>
+          Plataforma
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.plataforma }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fabricante">
+        <mat-header-cell *matHeaderCellDef>
+          Fabricante
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.fabricante }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="categoria">
+        <mat-header-cell *matHeaderCellDef>
+          Categoria
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.categoria }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>
+          Status
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.status }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fabricacao">
+        <mat-header-cell *matHeaderCellDef>
+          Fabricação
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          {{ game.fabricacao }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acao">
+        <mat-header-cell *matHeaderCellDef>
+          Ações
+        </mat-header-cell>
+        <mat-cell *matCellDef="let game">
+          <button (click)="delete(game._id);" mat-button color="primary">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button (click)="selecionar(game)" style="float: left;" mat-button color="primary">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
 
 
-            <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: colunas"></mat-row>
-        </mat-table>
-    </div>
+      <mat-header-row *matHeaderRowDef="colunas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: colunas"></mat-row>
+    </mat-table>
+  </div>
 
-    <div>
-        <form class="example-form">
-            <mat-form-field class="example-full-width">
-                <input matInput disabled value="Cadastro e Visualização dos Jogos">
-            </mat-form-field>
+  <div *ngIf="gameSelecionado">
 
-            <table class="example-full-width" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Título do Jogo</mat-label>
-                            <input matInput placeholder="Ex. BattleField 4">
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Fabricante</mat-label>
-                            <input matInput placeholder="Ex. EA Games">
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
+    <mat-form-field class="example-full-width">
+      <input matInput disabled value="Cadastro e Visualização dos Jogos">
+    </mat-form-field>
 
-            <p>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Plataformas</mat-label>
-                    <input matInput placeholder="Ex. Xbox-One / PlayStation4 ... ">
-                </mat-form-field>
-            </p>
-            <mat-form-field>
-                <mat-label>Categoria</mat-label>
-                <mat-select required>
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let categoria of categorias" [value]="categoria">
-                        {{categoria.name}}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="categoriaControl.hasError('required')">Please choose an animal</mat-error>
-                <mat-hint>{{categoriaControl.value?.sound}}</mat-hint>
-            </mat-form-field>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Título do Jogo</mat-label>
+            <input matInput placeholder="Ex. BattleField 4" [(ngModel)]="gameSelecionado.titulo">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Fabricante</mat-label>
+            <input matInput placeholder="Ex. EA Games" [(ngModel)]="gameSelecionado.fabricante">
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
 
-            <table class="example-full-width" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Game Status</mat-label>
-                            <input matInput placeholder="Ex. Zerado">
-                        </mat-form-field>
-                    </td>
-                    <td>
-                        <mat-form-field class="example-full-width">
-                            <mat-label>Ano de fabricação</mat-label>
-                            <input matInput maxlength="4" placeholder="Ex. 2012">
-                            <mat-hint align="end">Lançamento</mat-hint>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
+    <p>
+      <mat-form-field class="example-full-width">
+        <mat-label>Plataformas</mat-label>
+        <input matInput placeholder="Ex. Xbox-One / PlayStation4 ... " [(ngModel)]="gameSelecionado.plataforma">
+      </mat-form-field>
+    </p>
+    <mat-form-field>
+      <mat-label>Categoria</mat-label>
+      <mat-select required [(ngModel)]="gameSelecionado.categoria">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let categoria of categorias" [value]="categoria">
+          {{ categoria.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="categoriaControl.hasError('required')">Please choose an animal</mat-error>
+      <mat-hint>{{ categoriaControl.value?.sound }}</mat-hint>
+    </mat-form-field>
+
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Game Status</mat-label>
+            <input matInput placeholder="Ex. Zerado" [(ngModel)]="gameSelecionado.status">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Ano de fabricação</mat-label>
+            <input matInput maxlength="4" placeholder="Ex. 2012" [(ngModel)]="gameSelecionado.fabricacao">
+            <mat-hint align="end">Lançamento</mat-hint>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    
+    <button (click)="salvar()" class="btnAcao" mat-raised-button color="accent">Salvar</button>
+  </div>
 
 </mat-card>
